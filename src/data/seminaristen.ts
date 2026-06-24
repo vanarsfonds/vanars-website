@@ -1,6 +1,10 @@
-import augustImg from "@/assets/august.jpg";
-import gijsImg from "@/assets/gijs.jpg";
-import fabianImg from "@/assets/fabian.jpg";
+import processionAsset from "@/assets/uploads/procession.jpg.asset.json";
+import chapelAsset from "@/assets/uploads/chapel.jpg.asset.json";
+import liturgicalAsset from "@/assets/uploads/liturgical.jpg.asset.json";
+
+const augustImg = processionAsset.url;
+const gijsImg = chapelAsset.url;
+const fabianImg = liturgicalAsset.url;
 
 export type Seminarist = {
   slug: string;
