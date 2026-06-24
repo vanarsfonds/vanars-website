@@ -43,7 +43,7 @@ export const Route = createFileRoute("/seminaristen/$slug")({
 });
 
 function SeminaristDetail() {
-  const { seminarist: s } = Route.useLoaderData();
+  const { seminarist: s } = Route.useLoaderData() as { seminarist: import("@/data/seminaristen").Seminarist };
   const others = seminaristen.filter((x) => x.slug !== s.slug);
 
   return (

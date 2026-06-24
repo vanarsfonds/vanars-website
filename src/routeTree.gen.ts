@@ -9,38 +9,75 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DoneerRouteImport } from './routes/doneer'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SeminaristenIndexRouteImport } from './routes/seminaristen.index'
+import { Route as SeminaristenSlugRouteImport } from './routes/seminaristen.$slug'
 
+const DoneerRoute = DoneerRouteImport.update({
+  id: '/doneer',
+  path: '/doneer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SeminaristenIndexRoute = SeminaristenIndexRouteImport.update({
+  id: '/seminaristen/',
+  path: '/seminaristen/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeminaristenSlugRoute = SeminaristenSlugRouteImport.update({
+  id: '/seminaristen/$slug',
+  path: '/seminaristen/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/doneer': typeof DoneerRoute
+  '/seminaristen/$slug': typeof SeminaristenSlugRoute
+  '/seminaristen/': typeof SeminaristenIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/doneer': typeof DoneerRoute
+  '/seminaristen/$slug': typeof SeminaristenSlugRoute
+  '/seminaristen': typeof SeminaristenIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/doneer': typeof DoneerRoute
+  '/seminaristen/$slug': typeof SeminaristenSlugRoute
+  '/seminaristen/': typeof SeminaristenIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/doneer' | '/seminaristen/$slug' | '/seminaristen/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/doneer' | '/seminaristen/$slug' | '/seminaristen'
+  id: '__root__' | '/' | '/doneer' | '/seminaristen/$slug' | '/seminaristen/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DoneerRoute: typeof DoneerRoute
+  SeminaristenSlugRoute: typeof SeminaristenSlugRoute
+  SeminaristenIndexRoute: typeof SeminaristenIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/doneer': {
+      id: '/doneer'
+      path: '/doneer'
+      fullPath: '/doneer'
+      preLoaderRoute: typeof DoneerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/seminaristen/': {
+      id: '/seminaristen/'
+      path: '/seminaristen'
+      fullPath: '/seminaristen/'
+      preLoaderRoute: typeof SeminaristenIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seminaristen/$slug': {
+      id: '/seminaristen/$slug'
+      path: '/seminaristen/$slug'
+      fullPath: '/seminaristen/$slug'
+      preLoaderRoute: typeof SeminaristenSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DoneerRoute: DoneerRoute,
+  SeminaristenSlugRoute: SeminaristenSlugRoute,
+  SeminaristenIndexRoute: SeminaristenIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
