@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, DonateCTA } from "@/components/SiteLayout";
-import heroImg from "@/assets/hero.jpg";
-import seminariansImg from "@/assets/seminarians.jpg";
+import heroAsset from "@/assets/uploads/prostration.jpg.asset.json";
+import seminariansAsset from "@/assets/uploads/fssp.jpg.asset.json";
+const heroImg = heroAsset.url;
+const seminariansImg = seminariansAsset.url;
 import { seminaristen } from "@/data/seminaristen";
 
 export const Route = createFileRoute("/")({
