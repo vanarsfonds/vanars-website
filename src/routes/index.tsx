@@ -9,13 +9,13 @@ import { seminaristen } from "@/data/seminaristen";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pastoor Van Ars Stichting — De toekomst van de Kerk" },
+      { title: "Pastoor Van Ars Fonds — De toekomst van de Kerk" },
       {
         name: "description",
         content:
           "Ondersteuning van traditioneel katholieke roepingen en Nederlandse seminaristen bij het Instituut Christus Koning en Hogepriester.",
       },
-      { property: "og:title", content: "Pastoor Van Ars Stichting" },
+      { property: "og:title", content: "Pastoor Van Ars Fonds" },
       {
         property: "og:description",
         content: "Ondersteuning van traditioneel katholieke roepingen.",
@@ -133,7 +133,7 @@ function Index() {
                 gevormde priesters voor de toekomst van de Kerk worden
                 opgeleid.”
               </p>
-              <p className="mt-4 font-semibold">— Heilige Pastoor Van Ars Stichting.</p>
+              <p className="mt-4 font-semibold">— Heilige Pastoor Van Ars Fonds.</p>
             </div>
           </div>
         </div>

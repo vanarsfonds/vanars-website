@@ -4,11 +4,11 @@ import { PageShell } from "@/components/SiteLayout";
 export const Route = createFileRoute("/doneer")({
   head: () => ({
     meta: [
-      { title: "Doneer — Pastoor Van Ars Stichting" },
+      { title: "Doneer — Pastoor Van Ars Fonds" },
       {
         name: "description",
         content:
-          "Doneer aan de Heilige Pastoor Van Ars Stichting. Giften zijn fiscaal aftrekbaar via de Vereniging van Latijnse Liturgie (ANBI).",
+          "Doneer aan de Heilige Pastoor Van Ars Fonds. Giften zijn fiscaal aftrekbaar via de Vereniging van Latijnse Liturgie (ANBI).",
       },
     ],
   }),

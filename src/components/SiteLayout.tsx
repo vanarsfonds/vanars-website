@@ -12,7 +12,7 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10 md:py-8">
         <Link to="/" className="text-xl md:text-2xl tracking-wide">
-          Pastoor Van Ars Stichting
+          Pastoor Van Ars Fonds
         </Link>
         <nav className="flex items-center gap-8 text-sm md:text-base tracking-wide">
           <Link to="/seminaristen" className="hover:opacity-70 transition">
@@ -31,8 +31,8 @@ export function SiteFooter() {
   return (
     <footer className="bg-muted text-foreground">
       <div className="mx-auto max-w-4xl px-6 py-20 text-center">
-        <h3 className="text-3xl md:text-4xl">Heilige Pastoor Van Ars Stichting</h3>
-        <p className="mt-8 font-semibold">Heilige Pastoor Van Ars Stichting</p>
+        <h3 className="text-3xl md:text-4xl">Heilige Pastoor Van Ars Fonds</h3>
+        <p className="mt-8 font-semibold">Heilige Pastoor Van Ars Fonds</p>
         <p className="mt-4">info@vanars.nl</p>
         <p className="mt-1">IBAN: NL43 RABO 0134 4856 10</p>
         <p className="mt-1 text-sm text-muted-foreground">

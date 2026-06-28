@@ -80,7 +80,7 @@ const fabianSections: Seminarist["sections"] = [
   {
     title: "Persoonlijke achtergrond",
     paragraphs: [
-      "Ik ben geboren in São Paulo, Brazilië, en opgegroeid in België met Nederlandse familiewortels in Brabant en Gelderland. Mijn tweelingbroer en ik groeiden op in een niet-gelovige omgeving: mijn vader was cultureel katholiek maar niet praktiserend, mijn moeder niet gelovig. Het katholieke geloof was voor mij vrijwel onbekend tot mijn eenentwintigste. Ik was toen overtuigd athïast — voor mij was geloof een kunstmatige constructie die door ‘simpele mensen’ beoefend werd. Kerken vond ik mooi om de schoonheid, maar verder had het geen betekenis voor mij.",
+      "Ik ben geboren in São Paulo, Brazilië, en opgegroeid in België met Nederlandse familiewortels in Brabant en Gelderland. Mijn tweelingbroer en ik groeiden op in een niet-gelovige omgeving: mijn vader was cultureel katholiek maar niet praktiserend, mijn moeder niet gelovig. Het katholieke geloof was voor mij vrijwel onbekend tot mijn eenentwintigste. Ik was toen overtuigd atheïst — voor mij was geloof een kunstmatige constructie die door ‘simpele mensen’ beoefend werd. Kerken vond ik mooi om de schoonheid, maar verder had het geen betekenis voor mij.",
       "Toch bleef er iets knagen vanbinnen — een gevoel dat er iets niet klopte aan het beeld dat ik had van de wereld en van de kerk. Op een gegeven moment vroeg ik oprecht aan een mogelijke God wat de waarheid was. Niet lang daarna vond ik spontaan de Catechismus van de Katholieke Kerk in een bibliotheek. Ik was diep onder de indruk van de logische en redelijke uiteenzetting van het geloof. Hierna is een natuurlijke interesse ontstaan die alleen maar sterker werd.",
       "Qua werk heb ik verschillende dingen gedaan: in de ICT, als timmerman en in de logistiek. Ik heb drie jaar op Campus Aquino (broeders van Sint-Jan) in Utrecht gewoond, waar ik een actief lid was van de gemeenschap. Ik organiseerde activiteiten, startte een initiatief tegen eenzaamheid in de buurt en bezocht regelmatig eenzame mensen om een luisterend oor te bieden. Het afgelopen jaar hielp ik een organisatie met het opzetten van een website en werkte ik als IT-support — mensen thuis helpen met hun telefoon, computer en printer.",
     ],
@@ -155,7 +155,7 @@ export const seminaristen: Seminarist[] = [
     origin: "geboren in Brazilië (São Paulo), opgegroeid in België met Nederlandse herkomst.",
     image: fabianImg,
     intro:
-      "Fabian Vitor van Dijk vertelt openhartig over zijn weg van athïast naar roeping — geleid door genade, een diepe verbondenheid met Maria en de inspiratie van Pater Jan Koopman.",
+      "Fabian Vitor van Dijk vertelt openhartig over zijn weg van atheïst naar roeping — geleid door genade, een diepe verbondenheid met Maria en de inspiratie van Pater Jan Koopman.",
     sections: fabianSections,
     numbered: fabianNumbered,
   },

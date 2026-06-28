@@ -11,7 +11,7 @@ export const Route = createFileRoute("/seminaristen/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `Seminarist ${loaderData.seminarist.name} — Pastoor Van Ars Stichting` },
+          { title: `Seminarist ${loaderData.seminarist.name} — Pastoor Van Ars Fonds` },
           {
             name: "description",
             content: `${loaderData.seminarist.name}, ${loaderData.seminarist.subtitle}. ${loaderData.seminarist.intro}`,

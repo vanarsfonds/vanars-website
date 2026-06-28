@@ -5,7 +5,7 @@ import { seminaristen } from "@/data/seminaristen";
 export const Route = createFileRoute("/seminaristen/")({
   head: () => ({
     meta: [
-      { title: "Seminaristen — Pastoor Van Ars Stichting" },
+      { title: "Seminaristen — Pastoor Van Ars Fonds" },
       {
         name: "description",
         content:
