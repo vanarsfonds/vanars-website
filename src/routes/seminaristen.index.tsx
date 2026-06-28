@@ -24,7 +24,7 @@ function SeminaristenList() {
         <p className="mt-6 text-center text-xl text-muted-foreground max-w-2xl mx-auto">
           We ondersteunen alle Nederlandse seminaristen van het ICK.
         </p>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {seminaristen.map((s) => (
             <article key={s.slug} className="bg-muted/50 p-6 flex flex-col">
               <img
