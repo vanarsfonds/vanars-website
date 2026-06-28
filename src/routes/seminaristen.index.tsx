@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, DonateCTA } from "@/components/SiteLayout";
 import { seminaristen } from "@/data/seminaristen";
+import { useLanguage } from "@/lib/language-context";
 
 export const Route = createFileRoute("/seminaristen/")({
   head: () => ({
@@ -17,12 +18,16 @@ export const Route = createFileRoute("/seminaristen/")({
 });
 
 function SeminaristenList() {
+  const { lang, t } = useLanguage();
+  const l = (text: { nl: string; en: string }): string =>
+    lang === "en" ? text.en : text.nl;
+
   return (
     <PageShell>
       <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
-        <h1 className="text-5xl md:text-6xl text-center">Onze Seminaristen</h1>
+        <h1 className="text-5xl md:text-6xl text-center">{t.seminaristen_heading}</h1>
         <p className="mt-6 text-center text-xl text-muted-foreground max-w-2xl mx-auto">
-          We ondersteunen alle Nederlandse seminaristen van het ICK.
+          {t.seminaristen_subheading}
         </p>
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {seminaristen.map((s) => (
@@ -37,14 +42,14 @@ function SeminaristenList() {
               />
               <div className="text-center pt-8 pb-4 flex-1 flex flex-col">
                 <h2 className="text-2xl">{s.name}</h2>
-                <p className="mt-3 font-semibold">{s.subtitle}</p>
+                <p className="mt-3 font-semibold">{l(s.subtitle)}</p>
                 <div className="mt-6">
                   <Link
                     to="/seminaristen/$slug"
                     params={{ slug: s.slug }}
                     className="inline-block bg-foreground text-background px-8 py-3 text-sm tracking-wide hover:opacity-90 transition"
                   >
-                    Lees verder
+                    {t.grid_read_more}
                   </Link>
                 </div>
               </div>

@@ -5,6 +5,7 @@ import seminariansAsset from "@/assets/uploads/fssp.jpg.asset.json";
 const heroImg = heroAsset.url;
 const seminariansImg = seminariansAsset.url;
 import { seminaristen } from "@/data/seminaristen";
+import { useLanguage, loc } from "@/lib/language-context";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,13 +27,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const { lang, t } = useLanguage();
+
   return (
     <PageShell headerTransparent>
       {/* Hero */}
       <section className="relative h-[100vh] min-h-[640px] w-full overflow-hidden">
         <img
           src={heroImg}
-          alt="Seminaristen tijdens de Heilige Mis"
+          alt={t.hero_alt}
           className="absolute inset-0 h-full w-full object-cover"
           width={1920}
           height={1280}
@@ -40,36 +43,35 @@ function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
         <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-20 md:px-10 md:pb-28 text-white">
           <h1 className="text-5xl md:text-7xl lg:text-8xl max-w-4xl leading-[1.05]">
-            De toekomst van de Kerk.
+            {t.hero_heading}
           </h1>
           <p className="mt-8 text-xl md:text-2xl max-w-2xl opacity-95">
-            Ondersteuning van traditioneel katholieke roepingen.
+            {t.hero_subheading}
           </p>
           <div className="mt-10">
             <Link
               to="/doneer"
               className="inline-block bg-background/95 text-foreground px-12 py-4 text-base tracking-wide hover:bg-white transition"
             >
-              Doneer
+              {t.hero_btn}
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Wat doen we */}
+      {/* What do we do */}
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-12">
-          <h2 className="text-5xl md:text-6xl">Wat doen we?</h2>
+          <h2 className="text-5xl md:text-6xl">{t.what_heading}</h2>
           <p className="text-xl md:text-2xl leading-relaxed">
-            Met onze financiële bijdragen maken wij het mogelijk dat{" "}
-            <strong className="font-semibold">seminaristen</strong> hun scholing
-            kunnen afmaken bij het Instituut Christus Koning en Hogepriester
-            (ICK).
+            {t.what_body_1}
+            <strong className="font-semibold">{t.what_body_strong}</strong>
+            {t.what_body_2}
           </p>
         </div>
         <img
           src={seminariansImg}
-          alt="Seminaristen in processie"
+          alt={t.what_alt}
           className="w-full h-[60vh] object-cover"
           width={1920}
           height={1080}
@@ -77,11 +79,11 @@ function Index() {
         />
       </section>
 
-      {/* Seminaristen grid */}
+      {/* Seminarians grid */}
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32">
           <h2 className="text-4xl md:text-5xl text-center max-w-4xl mx-auto leading-tight">
-            We ondersteunen alle Nederlandse seminaristen van het ICK.
+            {t.grid_heading}
           </h2>
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             {seminaristen.map((s) => (
@@ -96,14 +98,14 @@ function Index() {
                 />
                 <div className="text-center pt-8 pb-4 flex-1 flex flex-col">
                   <h3 className="text-2xl">{s.name}</h3>
-                  <p className="mt-3 font-semibold">{s.subtitle}</p>
+                  <p className="mt-3 font-semibold">{loc(s.subtitle, lang)}</p>
                   <div className="mt-6">
                     <Link
                       to="/seminaristen/$slug"
                       params={{ slug: s.slug }}
                       className="inline-block bg-foreground text-background px-8 py-3 text-sm tracking-wide hover:opacity-90 transition"
                     >
-                      Lees verder
+                      {t.grid_read_more}
                     </Link>
                   </div>
                 </div>
@@ -116,24 +118,15 @@ function Index() {
       {/* Testimonials */}
       <section className="bg-background">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32 grid grid-cols-1 md:grid-cols-2 gap-16">
-          <h2 className="text-5xl md:text-6xl">Getuigenissen</h2>
+          <h2 className="text-5xl md:text-6xl">{t.testimonials_heading}</h2>
           <div className="space-y-12 text-lg md:text-xl leading-relaxed">
             <div>
-              <p>
-                “Dankzij de steun van weldoeners kan ik mijn opleiding tot
-                priester voltooien, zonder zorgen om financiële lasten. Iedere
-                Mis die ik straks mag opdragen draag ik mede voor hen op.”
-              </p>
-              <p className="mt-4 font-semibold">— Een seminarist van het ICK.</p>
+              <p>{t.testimonials_q1}</p>
+              <p className="mt-4 font-semibold">{t.testimonials_attr1}</p>
             </div>
             <div>
-              <p>
-                “Wij worden niet door Rome noch door het bisdom ondersteund. De
-                bijdragen van de gelovigen maken het mogelijk dat er goed
-                gevormde priesters voor de toekomst van de Kerk worden
-                opgeleid.”
-              </p>
-              <p className="mt-4 font-semibold">— Heilige Pastoor Van Ars Fonds.</p>
+              <p>{t.testimonials_q2}</p>
+              <p className="mt-4 font-semibold">{t.testimonials_attr2}</p>
             </div>
           </div>
         </div>
