@@ -1,8 +1,6 @@
-import processionAsset from "@/assets/uploads/procession.jpg.asset.json";
 import chapelAsset from "@/assets/uploads/chapel.jpg.asset.json";
 import liturgicalAsset from "@/assets/uploads/liturgical.jpg.asset.json";
 
-const augustImg = processionAsset.url;
 const gijsImg = chapelAsset.url;
 const fabianImg = liturgicalAsset.url;
 
@@ -80,18 +78,6 @@ const sharedNumbered: Seminarist["numbered"] = [
 
 export const seminaristen: Seminarist[] = [
   {
-    slug: "august-weber",
-    name: "August Weber",
-    subtitle: "Instituut Christus Koning",
-    birthYear: 2001,
-    origin: "uit Haarlem — Noord-Holland.",
-    image: augustImg,
-    intro:
-      "Ter kennismaking vertelt August Weber over wie hij is en hoe hij zijn roeping ervaart.",
-    sections: sharedSections,
-    numbered: sharedNumbered,
-  },
-  {
     slug: "gijs-uittenbogaard",
     name: "Gijs Uittenbogaard",
     subtitle: "“Spiritus en Sponsa dicunt veni.”",
@@ -105,7 +91,7 @@ export const seminaristen: Seminarist[] = [
   },
   {
     slug: "fabian-van-dijk",
-    name: "Fabian V. van Dijk",
+    name: "Fabian van Dijk",
     subtitle: "Dominicaan",
     birthYear: 2002,
     origin: "uit Groot-Ammers — een klein dorpje in Zuid-Holland.",
