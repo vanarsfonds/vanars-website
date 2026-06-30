@@ -30,7 +30,11 @@ function DoneerPage() {
         <div className="mt-16 border-t border-border pt-12 space-y-10 text-lg leading-relaxed">
           <div>
             <h2 className="text-3xl mb-4">{t.doneer_gift_heading}</h2>
-            <p>{t.doneer_body1}</p>
+            <p>
+              {t.doneer_body1_pre}
+              <strong className="font-semibold">{t.doneer_body1_strong}</strong>
+              {t.doneer_body1_post}
+            </p>
             <p className="mt-4">{t.doneer_body2}</p>
           </div>
 

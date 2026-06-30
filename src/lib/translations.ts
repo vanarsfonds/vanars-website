@@ -61,8 +61,11 @@ const nl = {
   doneer_subheading: "En investeer in de toekomst van de Kerk.",
   doneer_gift_heading:
     "Gift t.b.v. priesterstudent bij Instituut Christus Koning",
-  doneer_body1:
-    "De doelstelling “Het financieel ondersteunen van (buitenlandse) priesterstudenten die specifiek opgeleid worden om de liturgie volgens de normen van de RK Kerk in het Latijn te vieren” valt binnen de statuten van de Vereniging van Latijnse Liturgie en binnen de fiscale regelgeving voor een ANBI, waardoor een gift fiscaal aftrekbaar is voor de Nederlandse Inkomstenbelasting.",
+  doneer_body1_pre:
+    “De doelstelling “Het financieel ondersteunen van (buitenlandse) priesterstudenten die specifiek opgeleid worden om de liturgie volgens de normen van de RK Kerk in het Latijn te vieren” valt binnen de statuten van “,
+  doneer_body1_strong: “de Vereniging van Latijnse Liturgie”,
+  doneer_body1_post:
+    “ en binnen de fiscale regelgeving voor een ANBI, waardoor een gift fiscaal aftrekbaar is voor de Nederlandse Inkomstenbelasting.”,
   doneer_body2:
     "De Vereniging van Latijnse Liturgie maakt de donaties elk kwartaal over naar het Instituut Christus Koning, dat zelf geen ANBI in Nederland heeft.",
   doneer_how_heading: "Hoe u kunt bijdragen",
@@ -151,8 +154,11 @@ const en = {
   doneer_subheading: "And invest in the future of the Church.",
   doneer_gift_heading:
     "Gift for a seminarian at the Institute of Christ the King",
-  doneer_body1:
-    "The objective “Financially supporting (foreign) seminarians who are specifically trained to celebrate the liturgy according to the norms of the Roman Catholic Church in Latin” falls within the statutes of the Vereniging van Latijnse Liturgie and within the fiscal regulations for an ANBI, which means a donation is tax-deductible for Dutch income tax purposes.",
+  doneer_body1_pre:
+    “The objective “Financially supporting (foreign) seminarians who are specifically trained to celebrate the liturgy according to the norms of the Roman Catholic Church in Latin” falls within the statutes of “,
+  doneer_body1_strong: “de Vereniging van Latijnse Liturgie”,
+  doneer_body1_post:
+    “ and within the fiscal regulations for an ANBI, which means a donation is tax-deductible for Dutch income tax purposes.”,
   doneer_body2:
     "De Vereniging van Latijnse Liturgie transfers donations each quarter to the Institute of Christ the King, which does not itself hold ANBI status in the Netherlands.",
   doneer_how_heading: "How you can contribute",
