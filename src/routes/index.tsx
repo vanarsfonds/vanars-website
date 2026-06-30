@@ -10,13 +10,13 @@ import { useLanguage, loc } from "@/lib/language-context";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pastoor Van Ars Fonds — De toekomst van de Kerk" },
+      { title: "Van Ars Fonds — De toekomst van de Kerk" },
       {
         name: "description",
         content:
           "Ondersteuning van traditioneel katholieke roepingen en Nederlandse seminaristen bij het Instituut Christus Koning en Hogepriester.",
       },
-      { property: "og:title", content: "Pastoor Van Ars Fonds" },
+      { property: "og:title", content: "Van Ars Fonds" },
       {
         property: "og:description",
         content: "Ondersteuning van traditioneel katholieke roepingen.",

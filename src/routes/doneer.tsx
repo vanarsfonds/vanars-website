@@ -5,11 +5,11 @@ import { useLanguage } from "@/lib/language-context";
 export const Route = createFileRoute("/doneer")({
   head: () => ({
     meta: [
-      { title: "Doneer — Pastoor Van Ars Fonds" },
+      { title: "Doneer — Van Ars Fonds" },
       {
         name: "description",
         content:
-          "Doneer aan de Heilige Pastoor Van Ars Fonds. Giften zijn fiscaal aftrekbaar via de Vereniging van Latijnse Liturgie (ANBI).",
+          "Doneer aan het Van Ars Fonds. Giften zijn fiscaal aftrekbaar via de Vereniging van Latijnse Liturgie (ANBI).",
       },
     ],
   }),

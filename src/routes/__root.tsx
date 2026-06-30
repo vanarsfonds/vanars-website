@@ -80,13 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pastoor Van Ars Fonds" },
+      { title: "Van Ars Fonds" },
       {
         name: "description",
         content:
-          "Heilige Pastoor Van Ars Fonds — ondersteuning van traditioneel katholieke roepingen en Nederlandse seminaristen bij het Instituut Christus Koning.",
+          "Van Ars Fonds — ondersteuning van Nederlandse traditioneel katholieke roepingen en Nederlandse seminaristen bij het Instituut Christus Koning.",
       },
-      { property: "og:title", content: "Pastoor Van Ars Fonds" },
+      { property: "og:title", content: "Van Ars Fonds" },
       {
         property: "og:description",
         content: "Ondersteuning van traditioneel katholieke roepingen.",

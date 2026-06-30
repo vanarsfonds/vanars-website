@@ -6,7 +6,7 @@ import { useLanguage } from "@/lib/language-context";
 export const Route = createFileRoute("/seminaristen/")({
   head: () => ({
     meta: [
-      { title: "Seminaristen — Pastoor Van Ars Fonds" },
+      { title: "Seminaristen — Van Ars Fonds" },
       {
         name: "description",
         content:

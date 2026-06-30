@@ -15,7 +15,7 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10 md:py-8">
         <Link to="/" className="text-xl md:text-2xl tracking-wide">
-          Pastoor Van Ars Fonds
+          Van Ars Fonds
         </Link>
         <nav className="flex items-center gap-6 md:gap-8 text-sm md:text-base tracking-wide">
           <Link to="/seminaristen" className="hover:opacity-70 transition">

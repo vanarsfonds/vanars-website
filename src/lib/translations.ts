@@ -8,13 +8,13 @@ const nl = {
   // Hero section
   hero_alt: "Seminaristen tijdens de Heilige Mis",
   hero_heading: "De toekomst van de Kerk.",
-  hero_subheading: "Ondersteuning van traditioneel katholieke roepingen.",
+  hero_subheading: "Ondersteuning van Nederlandse traditioneel katholieke roepingen.",
   hero_btn: "Doneer",
 
   // "Wat doen we?" section
   what_heading: "Wat doen we?",
   what_body_1: "Met onze financiële bijdragen maken wij het mogelijk dat ",
-  what_body_strong: "seminaristen",
+  what_body_strong: "Nederlandse seminaristen",
   what_body_2:
     " hun scholing kunnen afmaken bij het Instituut Christus Koning en Hogepriester (ICK).",
   what_alt: "Seminaristen in processie",
@@ -31,7 +31,7 @@ const nl = {
   testimonials_attr1: "— Een seminarist van het ICK.",
   testimonials_q2:
     "“Wij worden niet door Rome noch door het bisdom ondersteund. De bijdragen van de gelovigen maken het mogelijk dat er goed gevormde priesters voor de toekomst van de Kerk worden opgeleid.”",
-  testimonials_attr2: "— Heilige Pastoor Van Ars Fonds.",
+  testimonials_attr2: "— Van Ars Fonds.",
 
   // Donate CTA
   cta_heading: "Doneer alstublieft.",
@@ -64,7 +64,7 @@ const nl = {
   doneer_body1:
     "De doelstelling “Het financieel ondersteunen van (buitenlandse) priesterstudenten die specifiek opgeleid worden om de liturgie volgens de normen van de RK Kerk in het Latijn te vieren” valt binnen de statuten van de Vereniging van Latijnse Liturgie en binnen de fiscale regelgeving voor een ANBI, waardoor een gift fiscaal aftrekbaar is voor de Nederlandse Inkomstenbelasting.",
   doneer_body2:
-    "De Vereniging maakt de donaties elk kwartaal over naar het Instituut Christus Koning, dat zelf geen ANBI in Nederland heeft.",
+    "De Vereniging van Latijnse Liturgie maakt de donaties elk kwartaal over naar het Instituut Christus Koning, dat zelf geen ANBI in Nederland heeft.",
   doneer_how_heading: "Hoe u kunt bijdragen",
   doneer_iban_label: "IBAN",
   doneer_tnv_label: "T.n.v.",
@@ -97,14 +97,14 @@ const en = {
   // Hero section
   hero_alt: "Seminarians during Holy Mass",
   hero_heading: "The Future of the Church.",
-  hero_subheading: "Supporting traditionally Catholic vocations.",
+  hero_subheading: "Supporting Dutch traditionally Catholic vocations.",
   hero_btn: "Donate",
 
   // "What do we do?" section
   what_heading: "What do we do?",
   what_body_1:
     "Through our financial contributions we make it possible for ",
-  what_body_strong: "seminarians",
+  what_body_strong: "Dutch seminarians",
   what_body_2:
     " to complete their formation at the Institute of Christ the King and High Priest (ICK).",
   what_alt: "Seminarians in procession",
@@ -121,7 +121,7 @@ const en = {
   testimonials_attr1: "— A seminarian of the ICK.",
   testimonials_q2:
     "“We receive no support from Rome or the diocese. The contributions of the faithful make it possible for well-formed priests to be trained for the future of the Church.”",
-  testimonials_attr2: "— Holy Curé of Ars Fund.",
+  testimonials_attr2: "— Van Ars Fonds.",
 
   // Donate CTA
   cta_heading: "Please donate.",
@@ -129,8 +129,8 @@ const en = {
   cta_btn: "Donate",
 
   // Footer
-  footer_heading: "Holy Curé of Ars Fund",
-  footer_org: "Holy Curé of Ars Fund",
+  footer_heading: "Heilige Pastoor Van Ars Fonds",
+  footer_org: "Heilige Pastoor Van Ars Fonds",
   footer_tnv: "in the name of: Vereniging van Latijnse Liturgie",
 
   // Seminarians list page
@@ -154,7 +154,7 @@ const en = {
   doneer_body1:
     "The objective “Financially supporting (foreign) seminarians who are specifically trained to celebrate the liturgy according to the norms of the Roman Catholic Church in Latin” falls within the statutes of the Vereniging van Latijnse Liturgie and within the fiscal regulations for an ANBI, which means a donation is tax-deductible for Dutch income tax purposes.",
   doneer_body2:
-    "The Association transfers donations each quarter to the Institute of Christ the King, which does not itself hold ANBI status in the Netherlands.",
+    "De Vereniging van Latijnse Liturgie transfers donations each quarter to the Institute of Christ the King, which does not itself hold ANBI status in the Netherlands.",
   doneer_how_heading: "How you can contribute",
   doneer_iban_label: "IBAN",
   doneer_tnv_label: "In the name of",
