@@ -3,7 +3,7 @@ import { PageShell, DonateCTA } from "@/components/SiteLayout";
 import { getSeminarist, seminaristen } from "@/data/seminaristen";
 import { useLanguage } from "@/lib/language-context";
 
-export const Route = createFileRoute("/seminaristen/$slug")({
+export const Route = createFileRoute("/$lang/seminaristen/$slug")({
   loader: ({ params }) => {
     const s = getSeminarist(params.slug);
     if (!s) throw notFound();
@@ -29,12 +29,12 @@ export const Route = createFileRoute("/seminaristen/$slug")({
 });
 
 function NotFoundPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   return (
     <PageShell>
       <div className="mx-auto max-w-2xl px-6 py-32 text-center">
         <h1 className="text-4xl">{t.seminarist_not_found}</h1>
-        <Link to="/seminaristen" className="mt-6 inline-block underline">
+        <Link to="/$lang/seminaristen" params={{ lang }} className="mt-6 inline-block underline">
           {t.seminarist_back}
         </Link>
       </div>
@@ -131,8 +131,8 @@ function SeminaristDetail() {
                 {others.map((o) => (
                   <Link
                     key={o.slug}
-                    to="/seminaristen/$slug"
-                    params={{ slug: o.slug }}
+                    to="/$lang/seminaristen/$slug"
+                    params={{ lang, slug: o.slug }}
                     className="underline text-lg hover:no-underline"
                   >
                     {o.name}

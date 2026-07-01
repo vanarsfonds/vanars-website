@@ -1,9 +1,9 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { useLanguage, type Language } from "@/lib/language-context";
 
 export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
-  const { lang, setLang, t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <header
@@ -14,17 +14,17 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
       }
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10 md:py-8">
-        <Link to="/" className="text-xl md:text-2xl tracking-wide">
+        <Link to="/$lang" params={{ lang }} className="text-xl md:text-2xl tracking-wide">
           Van Ars Fonds
         </Link>
         <nav className="flex items-center gap-6 md:gap-8 text-sm md:text-base tracking-wide">
-          <Link to="/seminaristen" className="hover:opacity-70 transition">
+          <Link to="/$lang/seminaristen" params={{ lang }} className="hover:opacity-70 transition">
             {t.nav_seminarians}
           </Link>
-          <Link to="/doneer" className="hover:opacity-70 transition">
+          <Link to="/$lang/doneer" params={{ lang }} className="hover:opacity-70 transition">
             {t.nav_donate}
           </Link>
-          <LanguageToggle lang={lang} setLang={setLang} transparent={transparent} />
+          <LanguageToggle lang={lang} transparent={transparent} />
         </nav>
       </div>
     </header>
@@ -33,13 +33,19 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
 
 function LanguageToggle({
   lang,
-  setLang,
   transparent,
 }: {
   lang: Language;
-  setLang: (l: Language) => void;
   transparent: boolean;
 }) {
+  const navigate = useNavigate();
+
+  const switchLang = (newLang: Language) => {
+    const currentPath = window.location.pathname;
+    const newPath = currentPath.replace(/^\/(nl|en)/, `/${newLang}`);
+    navigate({ to: newPath as any });
+  };
+
   const base = transparent
     ? "text-white/70 hover:text-white transition text-xs md:text-sm tracking-widest font-medium"
     : "text-muted-foreground hover:text-foreground transition text-xs md:text-sm tracking-widest font-medium";
@@ -50,7 +56,7 @@ function LanguageToggle({
   return (
     <div className="flex items-center gap-1 ml-2">
       <button
-        onClick={() => setLang("nl")}
+        onClick={() => switchLang("nl")}
         className={lang === "nl" ? active : base}
         aria-label="Nederlands"
       >
@@ -60,7 +66,7 @@ function LanguageToggle({
         /
       </span>
       <button
-        onClick={() => setLang("en")}
+        onClick={() => switchLang("en")}
         className={lang === "en" ? active : base}
         aria-label="English"
       >
@@ -102,7 +108,7 @@ export function PageShell({
 }
 
 export function DonateCTA() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   return (
     <section className="bg-neutral-500/80 bg-[linear-gradient(rgba(60,55,50,0.55),rgba(60,55,50,0.55))] text-white">
       <div className="mx-auto max-w-3xl px-6 py-28 text-center">
@@ -110,7 +116,8 @@ export function DonateCTA() {
         <p className="mt-6 text-lg md:text-xl opacity-90">{t.cta_body}</p>
         <div className="mt-10">
           <Link
-            to="/doneer"
+            to="/$lang/doneer"
+            params={{ lang }}
             className="inline-block bg-background text-foreground px-12 py-4 text-base tracking-wide hover:bg-white transition"
           >
             {t.cta_btn}

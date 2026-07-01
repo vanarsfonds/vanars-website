@@ -3,7 +3,7 @@ import { PageShell, DonateCTA } from "@/components/SiteLayout";
 import { seminaristen } from "@/data/seminaristen";
 import { useLanguage } from "@/lib/language-context";
 
-export const Route = createFileRoute("/seminaristen/")({
+export const Route = createFileRoute("/$lang/seminaristen/")({
   head: () => ({
     meta: [
       { title: "Seminaristen — Van Ars Fonds" },
@@ -45,8 +45,8 @@ function SeminaristenList() {
                 <p className="mt-3 font-semibold">{l(s.subtitle)}</p>
                 <div className="mt-6">
                   <Link
-                    to="/seminaristen/$slug"
-                    params={{ slug: s.slug }}
+                    to="/$lang/seminaristen/$slug"
+                    params={{ lang, slug: s.slug }}
                     className="inline-block bg-foreground text-background px-8 py-3 text-sm tracking-wide hover:opacity-90 transition"
                   >
                     {t.grid_read_more}

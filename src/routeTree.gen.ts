@@ -9,14 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as DoneerRouteImport } from './routes/doneer'
+import { Route as LangRouteImport } from './routes/$lang'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as SeminaristenIndexRouteImport } from './routes/seminaristen.index'
-import { Route as SeminaristenSlugRouteImport } from './routes/seminaristen.$slug'
+import { Route as LangIndexRouteImport } from './routes/$lang/index'
+import { Route as LangDoneerRouteImport } from './routes/$lang/doneer'
+import { Route as LangSeminaristenIndexRouteImport } from './routes/$lang/seminaristen.index'
+import { Route as LangSeminaristenSlugRouteImport } from './routes/$lang/seminaristen.$slug'
 
-const DoneerRoute = DoneerRouteImport.update({
-  id: '/doneer',
-  path: '/doneer',
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -24,58 +26,89 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SeminaristenIndexRoute = SeminaristenIndexRouteImport.update({
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangDoneerRoute = LangDoneerRouteImport.update({
+  id: '/doneer',
+  path: '/doneer',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangSeminaristenIndexRoute = LangSeminaristenIndexRouteImport.update({
   id: '/seminaristen/',
   path: '/seminaristen/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
-const SeminaristenSlugRoute = SeminaristenSlugRouteImport.update({
+const LangSeminaristenSlugRoute = LangSeminaristenSlugRouteImport.update({
   id: '/seminaristen/$slug',
   path: '/seminaristen/$slug',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/doneer': typeof DoneerRoute
-  '/seminaristen/$slug': typeof SeminaristenSlugRoute
-  '/seminaristen/': typeof SeminaristenIndexRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/$lang/doneer': typeof LangDoneerRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/seminaristen/$slug': typeof LangSeminaristenSlugRoute
+  '/$lang/seminaristen/': typeof LangSeminaristenIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/doneer': typeof DoneerRoute
-  '/seminaristen/$slug': typeof SeminaristenSlugRoute
-  '/seminaristen': typeof SeminaristenIndexRoute
+  '/$lang/doneer': typeof LangDoneerRoute
+  '/$lang': typeof LangIndexRoute
+  '/$lang/seminaristen/$slug': typeof LangSeminaristenSlugRoute
+  '/$lang/seminaristen': typeof LangSeminaristenIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/doneer': typeof DoneerRoute
-  '/seminaristen/$slug': typeof SeminaristenSlugRoute
-  '/seminaristen/': typeof SeminaristenIndexRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/$lang/doneer': typeof LangDoneerRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/seminaristen/$slug': typeof LangSeminaristenSlugRoute
+  '/$lang/seminaristen/': typeof LangSeminaristenIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/doneer' | '/seminaristen/$slug' | '/seminaristen/'
+  fullPaths:
+    | '/'
+    | '/$lang'
+    | '/$lang/doneer'
+    | '/$lang/'
+    | '/$lang/seminaristen/$slug'
+    | '/$lang/seminaristen/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/doneer' | '/seminaristen/$slug' | '/seminaristen'
-  id: '__root__' | '/' | '/doneer' | '/seminaristen/$slug' | '/seminaristen/'
+  to:
+    | '/'
+    | '/$lang/doneer'
+    | '/$lang'
+    | '/$lang/seminaristen/$slug'
+    | '/$lang/seminaristen'
+  id:
+    | '__root__'
+    | '/'
+    | '/$lang'
+    | '/$lang/doneer'
+    | '/$lang/'
+    | '/$lang/seminaristen/$slug'
+    | '/$lang/seminaristen/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DoneerRoute: typeof DoneerRoute
-  SeminaristenSlugRoute: typeof SeminaristenSlugRoute
-  SeminaristenIndexRoute: typeof SeminaristenIndexRoute
+  LangRoute: typeof LangRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/doneer': {
-      id: '/doneer'
-      path: '/doneer'
-      fullPath: '/doneer'
-      preLoaderRoute: typeof DoneerRouteImport
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -85,28 +118,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/seminaristen/': {
-      id: '/seminaristen/'
-      path: '/seminaristen'
-      fullPath: '/seminaristen/'
-      preLoaderRoute: typeof SeminaristenIndexRouteImport
-      parentRoute: typeof rootRouteImport
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRoute
     }
-    '/seminaristen/$slug': {
-      id: '/seminaristen/$slug'
+    '/$lang/doneer': {
+      id: '/$lang/doneer'
+      path: '/doneer'
+      fullPath: '/$lang/doneer'
+      preLoaderRoute: typeof LangDoneerRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/seminaristen/': {
+      id: '/$lang/seminaristen/'
+      path: '/seminaristen'
+      fullPath: '/$lang/seminaristen/'
+      preLoaderRoute: typeof LangSeminaristenIndexRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/seminaristen/$slug': {
+      id: '/$lang/seminaristen/$slug'
       path: '/seminaristen/$slug'
-      fullPath: '/seminaristen/$slug'
-      preLoaderRoute: typeof SeminaristenSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$lang/seminaristen/$slug'
+      preLoaderRoute: typeof LangSeminaristenSlugRouteImport
+      parentRoute: typeof LangRoute
     }
   }
 }
 
+interface LangRouteChildren {
+  LangDoneerRoute: typeof LangDoneerRoute
+  LangIndexRoute: typeof LangIndexRoute
+  LangSeminaristenSlugRoute: typeof LangSeminaristenSlugRoute
+  LangSeminaristenIndexRoute: typeof LangSeminaristenIndexRoute
+}
+
+const LangRouteChildren: LangRouteChildren = {
+  LangDoneerRoute: LangDoneerRoute,
+  LangIndexRoute: LangIndexRoute,
+  LangSeminaristenSlugRoute: LangSeminaristenSlugRoute,
+  LangSeminaristenIndexRoute: LangSeminaristenIndexRoute,
+}
+
+const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DoneerRoute: DoneerRoute,
-  SeminaristenSlugRoute: SeminaristenSlugRoute,
-  SeminaristenIndexRoute: SeminaristenIndexRoute,
+  LangRoute: LangRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/SiteLayout";
 import { useLanguage } from "@/lib/language-context";
 
-export const Route = createFileRoute("/doneer")({
+export const Route = createFileRoute("/$lang/doneer")({
   head: () => ({
     meta: [
       { title: "Doneer — Van Ars Fonds" },

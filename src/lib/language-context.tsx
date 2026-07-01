@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { translations } from "./translations";
 
 export type Language = "nl" | "en";
@@ -13,15 +13,26 @@ const LanguageContext = createContext<LanguageContextValue>({
   setLang: () => {},
 });
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
+export function LanguageProvider({
+  children,
+  lang: forcedLang,
+}: {
+  children: ReactNode;
+  lang?: Language;
+}) {
   const [lang, setLangState] = useState<Language>(() => {
+    if (forcedLang) return forcedLang;
     if (typeof window === "undefined") return "nl";
     return (localStorage.getItem("lang") as Language) ?? "nl";
   });
 
+  useEffect(() => {
+    if (forcedLang) setLangState(forcedLang);
+  }, [forcedLang]);
+
   const setLang = (newLang: Language) => {
     setLangState(newLang);
-    localStorage.setItem("lang", newLang);
+    if (!forcedLang) localStorage.setItem("lang", newLang);
   };
 
   return (
