@@ -2,6 +2,7 @@ import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { PageShell, DonateCTA } from "@/components/SiteLayout";
 import { getSeminarist, seminaristen } from "@/data/seminaristen";
 import { useLanguage } from "@/lib/language-context";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/$lang/seminaristen/$slug")({
   loader: ({ params }) => {
@@ -9,7 +10,7 @@ export const Route = createFileRoute("/$lang/seminaristen/$slug")({
     if (!s) throw notFound();
     return { seminarist: s };
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData, params }) => ({
     meta: loaderData
       ? [
           { title: `Seminarist ${loaderData.seminarist.name} — Van Ars Fonds` },
@@ -18,8 +19,17 @@ export const Route = createFileRoute("/$lang/seminaristen/$slug")({
             content: `${loaderData.seminarist.name}, ${loaderData.seminarist.subtitle.nl}. ${loaderData.seminarist.intro.nl}`,
           },
           { property: "og:title", content: `Seminarist ${loaderData.seminarist.name}` },
-          { property: "og:image", content: loaderData.seminarist.image },
-          { property: "twitter:image", content: loaderData.seminarist.image },
+          {
+            property: "og:description",
+            content: `${loaderData.seminarist.name}, ${loaderData.seminarist.subtitle.nl}`,
+          },
+          { property: "og:image", content: `${SITE_URL}${loaderData.seminarist.image}` },
+          {
+            property: "og:url",
+            content: `${SITE_URL}/${params.lang}/seminaristen/${params.slug}`,
+          },
+          { name: "twitter:card", content: "summary_large_image" },
+          { name: "twitter:image", content: `${SITE_URL}${loaderData.seminarist.image}` },
         ]
       : [],
   }),

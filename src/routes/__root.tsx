@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider, useLanguage } from "../lib/language-context";
+import { SITE_URL, DEFAULT_OG_IMAGE } from "../lib/site";
 
 function NotFoundComponent() {
   const { t } = useLanguage();
@@ -92,7 +93,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Ondersteuning van traditioneel katholieke roepingen.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: DEFAULT_OG_IMAGE },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: DEFAULT_OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

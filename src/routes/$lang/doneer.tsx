@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell } from "@/components/SiteLayout";
 import { useLanguage } from "@/lib/language-context";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/$lang/doneer")({
-  head: () => ({
+  head: ({ params }) => ({
     meta: [
       { title: "Doneer — Van Ars Fonds" },
       {
@@ -11,6 +12,13 @@ export const Route = createFileRoute("/$lang/doneer")({
         content:
           "Doneer aan het Van Ars Fonds. Giften zijn fiscaal aftrekbaar via de Vereniging van Latijnse Liturgie (ANBI).",
       },
+      { property: "og:title", content: "Doneer — Van Ars Fonds" },
+      {
+        property: "og:description",
+        content:
+          "Doneer aan het Van Ars Fonds. Giften zijn fiscaal aftrekbaar via de Vereniging van Latijnse Liturgie (ANBI).",
+      },
+      { property: "og:url", content: `${SITE_URL}/${params.lang}/doneer` },
     ],
   }),
   component: DoneerPage,

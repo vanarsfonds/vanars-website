@@ -6,9 +6,10 @@ const heroImg = heroAsset.url;
 const seminariansImg = seminariansAsset.url;
 import { seminaristen } from "@/data/seminaristen";
 import { useLanguage, loc } from "@/lib/language-context";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/$lang/")({
-  head: () => ({
+  head: ({ params }) => ({
     meta: [
       { title: "Van Ars Fonds — De toekomst van de Kerk" },
       {
@@ -21,6 +22,7 @@ export const Route = createFileRoute("/$lang/")({
         property: "og:description",
         content: "Ondersteuning van traditioneel katholieke roepingen.",
       },
+      { property: "og:url", content: `${SITE_URL}/${params.lang}/` },
     ],
   }),
   component: Index,

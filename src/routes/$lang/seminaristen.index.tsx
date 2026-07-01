@@ -2,9 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, DonateCTA } from "@/components/SiteLayout";
 import { seminaristen } from "@/data/seminaristen";
 import { useLanguage } from "@/lib/language-context";
+import { SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/$lang/seminaristen/")({
-  head: () => ({
+  head: ({ params }) => ({
     meta: [
       { title: "Seminaristen — Van Ars Fonds" },
       {
@@ -12,6 +13,13 @@ export const Route = createFileRoute("/$lang/seminaristen/")({
         content:
           "Maak kennis met de Nederlandse seminaristen die wij ondersteunen bij het Instituut Christus Koning.",
       },
+      { property: "og:title", content: "Seminaristen — Van Ars Fonds" },
+      {
+        property: "og:description",
+        content:
+          "Maak kennis met de Nederlandse seminaristen die wij ondersteunen bij het Instituut Christus Koning.",
+      },
+      { property: "og:url", content: `${SITE_URL}/${params.lang}/seminaristen` },
     ],
   }),
   component: SeminaristenList,
