@@ -4,6 +4,7 @@ const nl = {
   // Navigation
   nav_seminarians: "Seminaristen",
   nav_donate: "Doneer",
+  nav_toggle_menu: "Menu openen/sluiten",
 
   // Hero section
   hero_alt: "Seminaristen tijdens de Heilige Mis",
@@ -96,6 +97,7 @@ const en = {
   // Navigation
   nav_seminarians: "Seminarians",
   nav_donate: "Donate",
+  nav_toggle_menu: "Toggle menu",
 
   // Hero section
   hero_alt: "Seminarians during Holy Mass",
