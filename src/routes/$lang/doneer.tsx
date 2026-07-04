@@ -29,13 +29,13 @@ function DoneerPage() {
 
   return (
     <PageShell>
-      <section className="mx-auto max-w-3xl px-6 py-24 md:py-32">
+      <section className="mx-auto max-w-3xl px-6 py-24 md:py-12">
         <h1 className="text-5xl md:text-6xl text-center">{t.doneer_heading}</h1>
-        <p className="mt-6 text-center text-xl text-muted-foreground">
+        <p className="mt-6 md:mt-4 text-center text-xl text-muted-foreground">
           {t.doneer_subheading}
         </p>
 
-        <div className="mt-16 border-t border-border pt-12 space-y-10 text-lg leading-relaxed">
+        <div className="mt-16 md:mt-8 border-t border-border pt-12 md:pt-6 space-y-10 md:space-y-6 text-lg leading-relaxed">
           <div>
             <h2 className="text-3xl mb-4">{t.doneer_gift_heading}</h2>
             <p>
@@ -43,7 +43,7 @@ function DoneerPage() {
               <strong className="font-semibold">{t.doneer_body1_strong}</strong>
               {t.doneer_body1_post}
             </p>
-            <p className="mt-4">{t.doneer_body2}</p>
+            <p className="mt-4 md:mt-3">{t.doneer_body2}</p>
           </div>
 
           <div className="bg-muted/60 p-8 md:p-10 border-l-4 border-accent">
