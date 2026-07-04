@@ -76,6 +76,8 @@ const nl = {
   doneer_ovv_value_prefix: "“Gift t.b.v. priesteropleiding van ",
   doneer_ovv_placeholder: "(naam priesterstudent invullen)",
   doneer_ovv_value_suffix: " bij Instituut Christus Koning”",
+  doneer_copy_iban: "IBAN kopiëren",
+  doneer_copied: "Gekopieerd",
   doneer_thanks:
     "Dank voor uw steun, moge God u rijkelijk zegenen.",
 
@@ -171,6 +173,8 @@ const en = {
     "“Gift for the priestly formation of ",
   doneer_ovv_placeholder: "(fill in seminarian’s name)",
   doneer_ovv_value_suffix: " at the Institute of Christ the King”",
+  doneer_copy_iban: "Copy IBAN",
+  doneer_copied: "Copied",
   doneer_thanks:
     "Thank you for your support — may God bless you abundantly.",
 
