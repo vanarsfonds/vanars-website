@@ -41,7 +41,6 @@ const nl = {
 
   // Footer
   footer_heading: "Heilige Pastoor Van Ars Fonds",
-  footer_org: "Heilige Pastoor Van Ars Fonds",
   footer_tnv: "t.n.v. Vereniging van Latijnse Liturgie",
 
   // Seminarians list page
@@ -137,7 +136,6 @@ const en = {
 
   // Footer
   footer_heading: "Heilige Pastoor Van Ars Fonds",
-  footer_org: "Heilige Pastoor Van Ars Fonds",
   footer_tnv: "in the name of: Vereniging van Latijnse Liturgie",
 
   // Seminarians list page

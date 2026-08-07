@@ -187,8 +187,7 @@ export function SiteFooter() {
     <footer className="bg-muted text-foreground">
       <div className="mx-auto max-w-4xl px-6 py-20 text-center">
         <h3 className="text-3xl md:text-4xl">{t.footer_heading}</h3>
-        <p className="mt-8 font-semibold">{t.footer_org}</p>
-        <p className="mt-4">vanarsfonds@protonmail.com</p>
+        <p className="mt-8 font-semibold">info@vanars.nl</p>
         <p className="mt-1">IBAN: NL43 RABO 0134 4856 10</p>
         <p className="mt-1 text-sm text-muted-foreground">{t.footer_tnv}</p>
       </div>
