@@ -229,15 +229,15 @@ const fabianNumbered: Seminarist["numbered"] = [
   {
     title: { nl: "Aspecten van het priesterschap", en: "Aspects of the Priesthood" },
     quote: {
-      nl: `"Onderwijzing en prediking van het geloof zijn aspecten waartoe ik mij sterk geroepen voel — in het verleden voelde ik mij sterk gedragen in zulke momenten. Ook de biecht spreekt mij erg aan: ik analyseer graag mensen en hun problemen en wil een antwoord bieden. Het persoonlijk helpen van mensen, geestelijke begeleiding bieden en spirituele genezing — dat is waartoe ik mij het diepst geroepen voel."`,
-      en: `"Teaching and preaching the faith are aspects to which I feel strongly called — in the past I felt strongly supported in such moments. Confession also appeals greatly to me: I like to analyse people and their problems and want to offer an answer. Personally helping people, offering spiritual direction and spiritual healing — that is what I feel most deeply called to."`,
+      nl: `"Onderwijzing en prediking van het geloof zijn aspecten waartoe ik mij sterk geroepen voel — in het verleden voelde ik mij sterk gedragen in zulke momenten. Ook de biecht spreekt mij erg aan. Het persoonlijk helpen van mensen, geestelijke begeleiding bieden en spirituele genezing — dat is waartoe ik mij het diepst geroepen voel."`,
+      en: `"Teaching and preaching the faith are aspects to which I feel strongly called — in the past I felt strongly supported in such moments. Confession also appeals greatly to me. Personally helping people, offering spiritual direction and spiritual healing — that is what I feel most deeply called to."`,
     },
   },
   {
     title: { nl: "Persoonlijke noot", en: "Personal Note" },
     quote: {
       nl: `"Sinds ik voor het geloof heb gekozen, is mijn leven een avontuur geworden. Hoe meer ik kies voor de Heer, hoe meer het een avontuur wordt. Johannes 8:12 inspireert mij bijzonder: 'Ik ben het licht der wereld. Wie Mij volgt, zal niet in de duisternis wandelen, maar het licht des levens bezitten.' Je kunt licht niet zomaar 'doen' — je kunt het alleen zijn. Net zoals je licht kunt zien met je ogen en voelen met je huid zonder te kunnen uitleggen hoe het werkt, zo werkt ook God."`,
-      en: `"Since I chose for the faith, my life has become an adventure. The more I choose for the Lord, the more it becomes an adventure. John 8:12 inspires me particularly: 'I am the light of the world. He who follows Me will not walk in darkness, but will have the light of life.' You cannot simply 'do' light — you can only be it. Just as you can see light with your eyes and feel it on your skin without being able to explain how it works, so too does God work."`,
+      en: `"Since I chose to embrace the Faith, my life has become an adventure. And the more I decide to be with Him, the more it becomes an adventure. John 8:12 inspires me particularly: 'I am the light of the world. He who follows Me will not walk in darkness, but will have the light of life.' You cannot simply 'do' light — you can only be it. Just as you can see light with your eyes and feel it on your skin without being able to explain how it works, so too does God work."`,
     },
   },
 ];

@@ -8,7 +8,7 @@ const nl = {
 
   // Hero section
   hero_alt: "Seminaristen tijdens de Heilige Mis",
-  hero_heading: "De toekomst van de Kerk.",
+  hero_heading: "Om de Heilige Kerk te dienen en lief te hebben.",
   hero_subheading: "Ondersteuning van Nederlandse traditioneel katholieke roepingen.",
   hero_btn: "Doneer",
 
@@ -102,7 +102,7 @@ const en = {
 
   // Hero section
   hero_alt: "Seminarians during Holy Mass",
-  hero_heading: "The Future of the Church.",
+  hero_heading: "To serve and love the Holy Church.",
   hero_subheading: "Supporting Dutch traditionally Catholic vocations.",
   hero_btn: "Donate",
 

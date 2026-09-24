@@ -11,7 +11,7 @@ import { SITE_URL } from "@/lib/site";
 export const Route = createFileRoute("/$lang/")({
   head: ({ params }) => ({
     meta: [
-      { title: "Van Ars Fonds — De toekomst van de Kerk" },
+      { title: "Van Ars Fonds — Om de Heilige Kerk te dienen en lief te hebben" },
       {
         name: "description",
         content:
