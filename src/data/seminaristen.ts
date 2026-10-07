@@ -16,6 +16,8 @@ export type Seminarist = {
   intro: LocalizedText;
   sections: { title: LocalizedText; paragraphs: LocalizedText[] }[];
   numbered: { title: LocalizedText; quote: LocalizedText }[];
+  /** Extra photos shown between the sections, after the section with index `afterSection`. */
+  gallery?: { src: string; alt: LocalizedText; afterSection: number }[];
 };
 
 const gijsSections: Seminarist["sections"] = [
@@ -242,6 +244,108 @@ const fabianNumbered: Seminarist["numbered"] = [
   },
 ];
 
+const alexandreSections: Seminarist["sections"] = [
+  {
+    title: { nl: "Persoonlijke achtergrond", en: "Personal Background" },
+    paragraphs: [
+      {
+        nl: "Ik ben geboren in Saint-Herblain in Frankrijk en opgegroeid in Sint-Michielsgestel in Noord-Brabant. Als kind ben ik opgevoed door mijn moeder en grootmoeder, die beiden relatief 'randkatholiek' waren, maar die nu hun weg terug beginnen te vinden. Zo heb ik alle initiatiesacramenten mogen ontvangen, al was dat redelijk onbewust. De grote genade van mijn vormsel was dat ik mij op elfjarige leeftijd bewust werd van de waarheden van het geloof, door de begeleidende hand van de toenmalige kapelaan Zimmerman.",
+        en: "I was born in Saint-Herblain in France and grew up in Sint-Michielsgestel in North Brabant. As a child I was raised by my mother and grandmother, both of whom were rather 'nominally Catholic', but who are now beginning to find their way back. In this way I was able to receive all the sacraments of initiation, though rather unconsciously. The great grace of my confirmation was that, at the age of eleven, I became aware of the truths of the faith, through the guiding hand of the then chaplain, Father Zimmerman.",
+      },
+      {
+        nl: "Mijn formele opleidingen zijn de havo en die van aspirant-brandweerman en professioneel chauffeur. Daarnaast heb ik een veel groter aantal informele 'opleidingen', zoals die van hovenier, jager, imker en heraldist — en boven alles alles wat met de heilige liturgie van de Kerk te maken heeft.",
+        en: "My formal training consists of secondary school (havo) and courses as a trainee firefighter and professional driver. In addition I have a much larger number of informal 'trainings', such as gardener, hunter, beekeeper and heraldist — and above all everything related to the sacred liturgy of the Church.",
+      },
+      {
+        nl: "Mijn hobby's, vrijwilligerswerk en werk zijn zeer uiteenlopend. Zo ben ik zeven jaar lang betrokken geweest bij de brandweer en heb ik als hovenier gewerkt, maar ben ik ook al heel lang koster, misdienaar en organist in diverse parochies.",
+        en: "My hobbies, volunteer work and jobs are very diverse. For example, I was involved with the fire brigade for seven years and worked as a gardener, but I have also long been a sacristan, altar server and organist in various parishes.",
+      },
+    ],
+  },
+  {
+    title: { nl: "Roeping en spiritueel leven", en: "Vocation and Spiritual Life" },
+    paragraphs: [
+      {
+        nl: "Na mijn vormsel werd ik misdienaar in de lokale parochie bij kapelaan Zimmerman. Rond mijn twaalfde voelde ik een bepaalde leegte, die ik eigenlijk niet wist te beantwoorden of te vullen. Tot ik op een goede zondag de priester grondig bestudeerde. Wat deed hij daar nou? Wat vervulde hem? Toen besloot ik te bidden en onderzoek te doen naar het priesterschap. Al gauw wakkerde dit in mij een vurigheid aan om me er steeds meer in te verdiepen — ik vond er immers vervulling en vreugde in!",
+        en: "After my confirmation I became an altar server in the local parish under Father Zimmerman. Around the age of twelve I felt a certain emptiness that I did not really know how to answer or fill. Until one Sunday I studied the priest closely. What was he doing there? What fulfilled him? I then decided to pray and to look into the priesthood. This soon kindled in me a fervour to delve into it ever more deeply — for I found fulfilment and joy in it!",
+      },
+      {
+        nl: "Boven alles heeft de Heilige Maagd mij onder haar mantel begeleid, in het bijzonder door de heilige rozenkrans. Ook heb ik veel steun en vertrouwen gevonden bij de heilige Pastoor van Ars, de heilige Pater Pio en de heilige Theresia van Lisieux en haar ouders. De heilige Franciscus van Sales heeft mij geopend voor een bijzondere kijk op de zachtmoedigheid en hoe die in praktijk te brengen.",
+        en: "Above all, the Blessed Virgin has guided me under her mantle, especially through the holy Rosary. I have also found much support and trust in the holy Curé of Ars, Saint Padre Pio and Saint Thérèse of Lisieux and her parents. Saint Francis de Sales opened me to a particular view of gentleness and how to put it into practice.",
+      },
+      {
+        nl: "Mijn devoties zijn talrijk (eigenlijk te talrijk), maar degene die mij de meeste vervulling brengen en de band met de Heer versterken zijn toch altijd het Heilig Misoffer, het brevier en de rozenkrans.",
+        en: "My devotions are many (in fact too many), but the ones that bring me the most fulfilment and strengthen my bond with the Lord are always the Holy Sacrifice of the Mass, the breviary and the Rosary.",
+      },
+    ],
+  },
+  {
+    title: { nl: "Vorming en toekomst", en: "Formation and the Future" },
+    paragraphs: [
+      {
+        nl: "Momenteel studeer ik in het huis van kandidatuur van de Franse provincie van het Instituut Christus Koning in Loisy (Frankrijk). De volgende stap is om volgend schooljaar door te stromen naar het grootseminarie in Gricigliano (Italië). Het vele studeren wordt een mooie uitdaging, en het vooruitzicht op de broederschap en de tijd die ik met de Heer in het Heilig Sacrament mag doorbrengen, brengt mij veel vreugde.",
+        en: "I am currently studying at the house of candidacy of the French province of the Institute of Christ the King in Loisy (France). The next step is to move on to the major seminary in Gricigliano (Italy) next school year. The many studies will be a fine challenge, and the prospect of fraternity and of the time I may spend with the Lord in the Blessed Sacrament brings me great joy.",
+      },
+      {
+        nl: "In maart van het Jaar des Heren 2025 mocht ik Gricigliano bezoeken. Daar ging voor mij een wereld van broederschap open. Ik mocht ervaren hoe het is om met zoveel gelijkgezinden naar dezelfde roeping te streven, en boven alles naar heiligheid. Dat heeft me intens geraakt.",
+        en: "In March of the Year of Our Lord 2025 I was able to visit Gricigliano. There a world of fraternity opened up to me. I experienced what it is like to strive with so many like-minded people towards the same vocation, and above all towards holiness. That touched me deeply.",
+      },
+      {
+        nl: "Als toekomstig priester hoop ik trouw te volgen wat mijn oversten van mij vragen, en ondanks mijn eigen tekortkomingen altijd klaar te staan voor de zielen. De zachtmoedigheid lijkt tegenwoordig bij mensen vrijwel verdwenen; dat is echt een uitdaging voor de huidige geestelijken. De beste aanpak lijkt mij veel gebed en vele offers, en zachtmoedigheid en nederigheid tonen aan hen die hardnekkig blijven. Door standvastig te blijven in de leer en de liturgie van de Heilige Kerk en zielen met open armen te ontvangen, kan er echt een verschil gemaakt worden.",
+        en: "As a future priest I hope to faithfully follow what my superiors ask of me, and despite my own shortcomings to always be ready for souls. Gentleness seems to have all but disappeared among people today; that is a real challenge for today's clergy. The best approach seems to me to be much prayer and many sacrifices, and showing gentleness and humility towards those who remain obstinate. By remaining steadfast in the teaching and liturgy of Holy Church and receiving souls with open arms, a real difference can be made.",
+      },
+      {
+        nl: "Liturgie is al lange tijd een passie van mij. Ik hoop me er nog verder in te specialiseren, om zo ook andere geestelijken te openen voor de diepgang en de vruchten van de tridentijnse liturgie — zodat ook zij er meer mensen mee mogen bereiken, als een soort olievlek.",
+        en: "Liturgy has long been a passion of mine. I hope to specialise in it even further, so as to open other clergy too to the depth and fruits of the Tridentine liturgy — so that they too may reach more people with it, spreading like an oil stain.",
+      },
+    ],
+  },
+  {
+    title: { nl: "Dankbaarheid en verbondenheid", en: "Gratitude and Connection" },
+    paragraphs: [
+      {
+        nl: "Financiële steun is voor mij belangrijk vanwege de grote druk die mijn studie legt op mijn alleenstaande moeder. Samen kunnen mijn moeder en ik het niet bekostigen. Daarom hoop ik op de gulle hand van hen die werkelijk de toekomst van het priesterschap in ons, seminaristen, zien, zodat ik Gods roepstem kan blijven volgen. In alle dankbaarheid neem ik alle bijdragers van het fonds dagelijks mee in mijn gebed!",
+        en: "Financial support is important to me because of the great pressure my studies place on my single mother. Together, my mother and I cannot afford it. That is why I hope for the generous hand of those who truly see the future of the priesthood in us seminarians, so that I may continue to follow God's call. In all gratitude I gladly remember all contributors to the fund in my prayers every day!",
+      },
+      {
+        nl: "Graag vraag ik ook om gebed voor volharding en voor heilige priesters. De beste manier om ons te steunen is door voor ons te bidden en kleine dagelijkse offertjes te brengen voor onze heiliging — dat is waarlijk geestelijk voedsel. En voor het wereldlijke voedsel vragen wij om uw donaties, hoe klein ook, want alle beetjes gaan naar een uiterst goede bestemming. Het is immers de toekomst van de Kerk die u hiermee steunt!",
+        en: "I would also like to ask for prayers for perseverance and for holy priests. The best way to support us is to pray for us and to make small daily sacrifices for our sanctification — that is truly spiritual nourishment. And for worldly nourishment we ask for your donations, however small, because every little bit goes to an excellent cause. After all, it is the future of the Church that you support in this way!",
+      },
+    ],
+  },
+];
+
+const alexandreNumbered: Seminarist["numbered"] = [
+  {
+    title: { nl: "Het begin van de roeping", en: "The Beginning of a Vocation" },
+    quote: {
+      nl: `"Rond mijn twaalfde voelde ik een bepaalde leegte. Tot ik op een goede zondag de priester grondig bestudeerde. Wat deed hij daar nou? Wat vervulde hem? Toen besloot ik te bidden en onderzoek te doen naar het priesterschap — en al gauw vond ik er vervulling en vreugde in."`,
+      en: `"Around the age of twelve I felt a certain emptiness. Until one Sunday I studied the priest closely. What was he doing there? What fulfilled him? I then decided to pray and to look into the priesthood — and I soon found fulfilment and joy in it."`,
+    },
+  },
+  {
+    title: { nl: "Aspecten van het priesterschap", en: "Aspects of the Priesthood" },
+    quote: {
+      nl: `"De volledigheid van het priesterschap raakt mij het meest: de totale overgave aan Gods wil en het afsterven aan onszelf voor het heil van de zielen. 'Ik ben niet gekomen om gediend te worden, maar om te dienen.' Er zijn voor hen die aan ons worden toevertrouwd en voor elkaar — dit alles in Onze Lieve Heer."`,
+      en: `"The totality of the priesthood moves me most: the complete surrender to God's will and dying to ourselves for the salvation of souls. 'I came not to be served, but to serve.' Being there for those entrusted to us and for one another — all this in Our Lord."`,
+    },
+  },
+  {
+    title: { nl: "Wapenspreuk", en: "Motto" },
+    quote: {
+      nl: `"Mijn wapenspreuk luidt 'Ave Crux, spes unica'. Het is een dankbare herinnering aan het feit dat het lijden een prachtige weg naar de heiligheid is, en dat ieder offertje dat we geven ons dichter bij de Calvarieberg brengt, om ons op een dag met Christus te kunnen verenigen."`,
+      en: `"My motto is 'Ave Crux, spes unica' — Hail, O Cross, our only hope. It is a grateful reminder that suffering is a beautiful path to holiness, and that every little sacrifice we offer brings us closer to Calvary, so that one day we may be united with Christ."`,
+    },
+  },
+  {
+    title: { nl: "Persoonlijke noot", en: "Personal Note" },
+    quote: {
+      nl: `"Zonder financiën komen we er lastig, maar zonder gebed komen we er niet. Deo gratias!"`,
+      en: `"Without finances it is hard to get there, but without prayer we will not get there at all. Deo gratias!"`,
+    },
+  },
+];
+
 export const seminaristen: Seminarist[] = [
   {
     slug: "gijs-uittenbogaard",
@@ -282,6 +386,44 @@ export const seminaristen: Seminarist[] = [
     },
     sections: fabianSections,
     numbered: fabianNumbered,
+  },
+  {
+    slug: "alexandre-gourmaud-roodenrijs",
+    name: "Alexandre Gourmaud-Roodenrijs",
+    subtitle: {
+      nl: `"Ave Crux, spes unica."`,
+      en: `"Ave Crux, spes unica."`,
+    },
+    birthYear: 2006,
+    origin: {
+      nl: "geboren in Saint-Herblain (Frankrijk), opgegroeid in Sint-Michielsgestel (Noord-Brabant).",
+      en: "born in Saint-Herblain (France), raised in Sint-Michielsgestel (North Brabant).",
+    },
+    image: "/Seminarist-Alexandre.jpg",
+    intro: {
+      nl: "Alexandre Claude Jacques Leo Gourmaud-Roodenrijs vertelt over zijn roeping, die ontstond als misdienaar aan het altaar, over zijn liefde voor de heilige liturgie en over zijn vorming bij het Instituut Christus Koning.",
+      en: "Alexandre Claude Jacques Leo Gourmaud-Roodenrijs tells of his vocation, which arose as an altar server, of his love for the sacred liturgy and of his formation with the Institute of Christ the King.",
+    },
+    sections: alexandreSections,
+    numbered: alexandreNumbered,
+    gallery: [
+      {
+        src: "/Alexandre-processie.jpg",
+        alt: {
+          nl: "Alexandre tijdens een pontificale Mis, met het missaal in de hand",
+          en: "Alexandre during a Pontifical Mass, holding the missal",
+        },
+        afterSection: 1,
+      },
+      {
+        src: "/Alexandre-kardinalen.jpg",
+        alt: {
+          nl: "Alexandre in koorkleding tijdens een openluchtviering",
+          en: "Alexandre in choir dress during an open-air celebration",
+        },
+        afterSection: 2,
+      },
+    ],
   },
 ];
 

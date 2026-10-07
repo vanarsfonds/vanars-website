@@ -37,7 +37,7 @@ function SeminaristenList() {
         <p className="mt-6 text-center text-xl text-muted-foreground max-w-2xl mx-auto">
           {t.seminaristen_subheading}
         </p>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {seminaristen.map((s) => (
             <article key={s.slug} className="bg-muted/50 p-6 flex flex-col">
               <img
@@ -51,7 +51,7 @@ function SeminaristenList() {
               <div className="text-center pt-8 pb-4 flex-1 flex flex-col">
                 <h2 className="text-2xl">{s.name}</h2>
                 <p className="mt-3 font-semibold">{l(s.subtitle)}</p>
-                <div className="mt-6">
+                <div className="mt-auto pt-6">
                   <Link
                     to="/$lang/seminaristen/$slug"
                     params={{ lang, slug: s.slug }}

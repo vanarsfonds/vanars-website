@@ -88,7 +88,7 @@ function Index() {
           <h2 className="text-4xl md:text-5xl text-center max-w-4xl mx-auto leading-tight">
             {t.grid_heading}
           </h2>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {seminaristen.map((s) => (
               <article key={s.slug} className="bg-muted/50 p-6 flex flex-col">
                 <img
@@ -102,7 +102,7 @@ function Index() {
                 <div className="text-center pt-8 pb-4 flex-1 flex flex-col">
                   <h3 className="text-2xl">{s.name}</h3>
                   <p className="mt-3 font-semibold">{loc(s.subtitle, lang)}</p>
-                  <div className="mt-6">
+                  <div className="mt-auto pt-6">
                     <Link
                       to="/$lang/seminaristen/$slug"
                       params={{ lang, slug: s.slug }}

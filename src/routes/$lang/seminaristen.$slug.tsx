@@ -1,4 +1,5 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { Fragment } from "react";
 import { PageShell, DonateCTA } from "@/components/SiteLayout";
 import { getSeminarist, seminaristen } from "@/data/seminaristen";
 import { useLanguage } from "@/lib/language-context";
@@ -104,19 +105,33 @@ function SeminaristDetail() {
           </p>
         </div>
 
-        {s.sections.map((section) => (
-          <section key={section.title.nl} className="border-t border-border">
-            <div className="mx-auto max-w-6xl px-6 py-16 md:py-24 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 md:gap-16">
-              <h2 className="text-3xl md:text-4xl leading-tight">
-                {l(section.title)}
-              </h2>
-              <div className="space-y-6 text-lg leading-relaxed">
-                {section.paragraphs.map((p, i) => (
-                  <p key={i}>{l(p)}</p>
-                ))}
+        {s.sections.map((section, sectionIndex) => (
+          <Fragment key={section.title.nl}>
+            <section className="border-t border-border">
+              <div className="mx-auto max-w-6xl px-6 py-16 md:py-24 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 md:gap-16">
+                <h2 className="text-3xl md:text-4xl leading-tight">
+                  {l(section.title)}
+                </h2>
+                <div className="space-y-6 text-lg leading-relaxed">
+                  {section.paragraphs.map((p, i) => (
+                    <p key={i}>{l(p)}</p>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+            {s.gallery
+              ?.filter((g) => g.afterSection === sectionIndex)
+              .map((g) => (
+                <figure key={g.src} className="mx-auto max-w-5xl px-6 pb-16 md:pb-24">
+                  <img
+                    src={g.src}
+                    alt={l(g.alt)}
+                    className="w-full max-h-[80vh] object-contain"
+                    loading="lazy"
+                  />
+                </figure>
+              ))}
+          </Fragment>
         ))}
 
         <section className="border-t border-border bg-muted/40">
