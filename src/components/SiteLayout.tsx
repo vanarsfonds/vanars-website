@@ -2,7 +2,13 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useLanguage, type Language } from "@/lib/language-context";
 
-export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
+export function SiteHeader({
+  transparent = false,
+  showLanguageToggle = true,
+}: {
+  transparent?: boolean;
+  showLanguageToggle?: boolean;
+}) {
   const { lang, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -63,7 +69,7 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
           <Link to="/$lang/doneer" params={{ lang }} className="hover:opacity-70 transition">
             {t.nav_donate}
           </Link>
-          <LanguageToggle lang={lang} transparent={transparent} />
+          {showLanguageToggle && <LanguageToggle lang={lang} transparent={transparent} />}
         </nav>
         <button
           ref={buttonRef}
@@ -102,9 +108,11 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
           >
             {t.nav_donate}
           </Link>
-          <div className="mt-2 border-t border-border pt-3">
-            <LanguageToggle lang={lang} transparent={false} onNavigate={closeMenu} />
-          </div>
+          {showLanguageToggle && (
+            <div className="mt-2 border-t border-border pt-3">
+              <LanguageToggle lang={lang} transparent={false} onNavigate={closeMenu} />
+            </div>
+          )}
         </nav>
       </div>
     </header>
@@ -198,13 +206,15 @@ export function SiteFooter() {
 export function PageShell({
   children,
   headerTransparent = false,
+  showLanguageToggle = true,
 }: {
   children: ReactNode;
   headerTransparent?: boolean;
+  showLanguageToggle?: boolean;
 }) {
   return (
     <div className="min-h-screen flex flex-col">
-      <SiteHeader transparent={headerTransparent} />
+      <SiteHeader transparent={headerTransparent} showLanguageToggle={showLanguageToggle} />
       <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>

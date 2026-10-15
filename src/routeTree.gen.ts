@@ -9,21 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as MissenRouteImport } from './routes/missen'
 import { Route as LangRouteImport } from './routes/$lang'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as LangIndexRouteImport } from './routes/$lang/index'
 import { Route as LangDoneerRouteImport } from './routes/$lang/doneer'
 import { Route as LangSeminaristenIndexRouteImport } from './routes/$lang/seminaristen.index'
 import { Route as LangSeminaristenSlugRouteImport } from './routes/$lang/seminaristen.$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const MissenRoute = MissenRouteImport.update({
+  id: '/missen',
+  path: '/missen',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LangRoute = LangRouteImport.update({
   id: '/$lang',
   path: '/$lang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LangIndexRoute = LangIndexRouteImport.update({
@@ -50,6 +56,7 @@ const LangSeminaristenSlugRoute = LangSeminaristenSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$lang': typeof LangRouteWithChildren
+  '/missen': typeof MissenRoute
   '/$lang/doneer': typeof LangDoneerRoute
   '/$lang/': typeof LangIndexRoute
   '/$lang/seminaristen/$slug': typeof LangSeminaristenSlugRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/missen': typeof MissenRoute
   '/$lang/doneer': typeof LangDoneerRoute
   '/$lang': typeof LangIndexRoute
   '/$lang/seminaristen/$slug': typeof LangSeminaristenSlugRoute
@@ -66,6 +74,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$lang': typeof LangRouteWithChildren
+  '/missen': typeof MissenRoute
   '/$lang/doneer': typeof LangDoneerRoute
   '/$lang/': typeof LangIndexRoute
   '/$lang/seminaristen/$slug': typeof LangSeminaristenSlugRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$lang'
+    | '/missen'
     | '/$lang/doneer'
     | '/$lang/'
     | '/$lang/seminaristen/$slug'
@@ -83,6 +93,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/missen'
     | '/$lang/doneer'
     | '/$lang'
     | '/$lang/seminaristen/$slug'
@@ -91,6 +102,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$lang'
+    | '/missen'
     | '/$lang/doneer'
     | '/$lang/'
     | '/$lang/seminaristen/$slug'
@@ -100,15 +112,16 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LangRoute: typeof LangRouteWithChildren
+  MissenRoute: typeof MissenRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/missen': {
+      id: '/missen'
+      path: '/missen'
+      fullPath: '/missen'
+      preLoaderRoute: typeof MissenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$lang': {
@@ -116,6 +129,13 @@ declare module '@tanstack/react-router' {
       path: '/$lang'
       fullPath: '/$lang'
       preLoaderRoute: typeof LangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$lang/': {
@@ -168,6 +188,7 @@ const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LangRoute: LangRouteWithChildren,
+  MissenRoute: MissenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

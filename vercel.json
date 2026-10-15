@@ -1,5 +1,11 @@
 {
   "framework": null,
   "buildCommand": "bun run build",
-  "installCommand": "bun install"
+  "installCommand": "bun install",
+  "headers": [
+    {
+      "source": "/missen/:path*",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
 }
