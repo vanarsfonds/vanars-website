@@ -1,5 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState, type KeyboardEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 import { PageShell } from "@/components/SiteLayout";
 import { LanguageProvider } from "@/lib/language-context";
 import { MISSEN, type Mis } from "@/data/missen";
@@ -157,6 +164,39 @@ function MissenPage() {
   );
 }
 
+const [MAP_W, MAP_H] = MAP_VIEWBOX.split(" ").slice(2).map(Number);
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 8;
+const BUTTON_ZOOM_STEP = 1.6;
+const DRAG_THRESHOLD_PX = 4;
+
+/** z = zoomfactor, (x, y) = middelpunt van het zichtbare gebied in kaartcoördinaten. */
+interface View {
+  z: number;
+  x: number;
+  y: number;
+}
+
+const HOME: View = { z: 1, x: MAP_W / 2, y: MAP_H / 2 };
+
+function clampView({ z, x, y }: View): View {
+  const zc = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
+  const hw = MAP_W / zc / 2;
+  const hh = MAP_H / zc / 2;
+  return {
+    z: zc,
+    x: Math.min(MAP_W - hw, Math.max(hw, x)),
+    y: Math.min(MAP_H - hh, Math.max(hh, y)),
+  };
+}
+
+/** Zoom met factor, waarbij kaartpunt (px, py) op dezelfde plek op het scherm blijft. */
+function zoomAt(v: View, factor: number, px: number, py: number): View {
+  const z = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, v.z * factor));
+  const ratio = v.z / z;
+  return clampView({ z, x: px - (px - v.x) * ratio, y: py - (py - v.y) * ratio });
+}
+
 function MissenMap({
   items,
   activeId,
@@ -172,36 +212,141 @@ function MissenMap({
 }) {
   const active = items.find((m) => m.id === activeId) ?? null;
 
+  const svgRef = useRef<SVGSVGElement>(null);
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const dragged = useRef(false);
+  const [view, setView] = useState<View>(HOME);
+  const [panning, setPanning] = useState(false);
+
+  const vw = MAP_W / view.z;
+  const vh = MAP_H / view.z;
+  const x0 = view.x - vw / 2;
+  const y0 = view.y - vh / 2;
+  const k = 1 / view.z; // tegengewicht, zodat markers en labels even groot blijven
+
+  /** Scherm- naar kaartcoördinaten (houdt rekening met letterboxing van de svg). */
+  const toMap = useCallback((clientX: number, clientY: number): [number, number] | null => {
+    const svg = svgRef.current;
+    const ctm = svg?.getScreenCTM();
+    if (!svg || !ctm) return null;
+    const p = new DOMPoint(clientX, clientY).matrixTransform(ctm.inverse());
+    return [p.x, p.y];
+  }, []);
+
+  const zoomBy = useCallback((factor: number) => {
+    setView((v) => zoomAt(v, factor, v.x, v.y));
+  }, []);
+
+  // Ctrl/⌘ + scrollwiel (en trackpad-pinch) zoomt; gewoon scrollen blijft de pagina scrollen.
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const onWheel = (e: WheelEvent) => {
+      if (!e.ctrlKey && !e.metaKey) return;
+      e.preventDefault();
+      const p = toMap(e.clientX, e.clientY);
+      if (!p) return;
+      const factor = Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.002));
+      setView((v) => zoomAt(v, factor, p[0], p[1]));
+    };
+    svg.addEventListener("wheel", onWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", onWheel);
+  }, [toMap]);
+
+  const onPointerDown = (e: PointerEvent<SVGSVGElement>) => {
+    if (pointers.current.size === 0) dragged.current = false;
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  };
+
+  const onPointerMove = (e: PointerEvent<SVGSVGElement>) => {
+    const prev = pointers.current.get(e.pointerId);
+    if (!prev) return;
+    if (e.pointerType === "mouse" && e.buttons === 0) {
+      // Muis losgelaten buiten de kaart: pointerup is dan gemist.
+      pointers.current.delete(e.pointerId);
+      setPanning(false);
+      return;
+    }
+    const next = { x: e.clientX, y: e.clientY };
+    const ctm = svgRef.current?.getScreenCTM();
+    if (!ctm) return;
+
+    if (pointers.current.size === 2) {
+      // Pinch: zoom rond het midden tussen de twee vingers.
+      const other = [...pointers.current.entries()].find(([id]) => id !== e.pointerId)![1];
+      const before = Math.hypot(prev.x - other.x, prev.y - other.y);
+      const after = Math.hypot(next.x - other.x, next.y - other.y);
+      const mid = toMap((next.x + other.x) / 2, (next.y + other.y) / 2);
+      pointers.current.set(e.pointerId, next);
+      dragged.current = true;
+      if (mid && before > 0) setView((v) => zoomAt(v, after / before, mid[0], mid[1]));
+      return;
+    }
+
+    if (view.z === MIN_ZOOM) return;
+    if (!dragged.current) {
+      // Pas na een drempel als slepen zien, zodat klikken op een marker blijft werken.
+      const start = Math.hypot(next.x - prev.x, next.y - prev.y);
+      if (start < DRAG_THRESHOLD_PX) return;
+      dragged.current = true;
+      setPanning(true);
+      e.currentTarget.setPointerCapture(e.pointerId);
+    }
+    pointers.current.set(e.pointerId, next);
+    const dx = (next.x - prev.x) / ctm.a;
+    const dy = (next.y - prev.y) / ctm.d;
+    setView((v) => clampView({ ...v, x: v.x - dx, y: v.y - dy }));
+  };
+
+  const onPointerEnd = (e: PointerEvent<SVGSVGElement>) => {
+    pointers.current.delete(e.pointerId);
+    if (pointers.current.size === 0) setPanning(false);
+  };
+
   return (
-    <figure>
+    <figure className="relative">
       <svg
-        viewBox={MAP_VIEWBOX}
+        ref={svgRef}
+        viewBox={`${x0} ${y0} ${vw} ${vh}`}
         role="group"
         aria-label="Kaart van Nederland met de plaatsen van de missen"
-        className="block h-auto max-h-[56vh] w-full md:max-h-[80vh]"
+        className={`block h-auto max-h-[56vh] w-full select-none md:max-h-[80vh] ${
+          view.z > 1 ? (panning ? "cursor-grabbing" : "cursor-grab") : ""
+        }`}
+        style={{ touchAction: view.z > 1 ? "none" : "pan-y" }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerEnd}
+        onPointerCancel={onPointerEnd}
+        onClickCapture={(e) => {
+          // Een sleepgebaar is geen klik op een marker.
+          if (!dragged.current) return;
+          dragged.current = false;
+          e.stopPropagation();
+        }}
       >
         <path
           d={GEO.de}
           className="fill-card stroke-border"
-          strokeWidth={0.75}
+          strokeWidth={0.75 * k}
           strokeLinejoin="round"
         />
         <path
           d={GEO.be}
           className="fill-card stroke-border"
-          strokeWidth={0.75}
+          strokeWidth={0.75 * k}
           strokeLinejoin="round"
         />
         <path
           d={GEO.nl}
           className="fill-muted stroke-border"
-          strokeWidth={0.9}
+          strokeWidth={0.9 * k}
           strokeLinejoin="round"
         />
         <path
           d={GEO.water}
           className="fill-background stroke-border"
-          strokeWidth={0.9}
+          strokeWidth={0.9 * k}
           strokeLinejoin="round"
         />
 
@@ -228,24 +373,54 @@ function MissenMap({
                 }
               }}
             >
-              {/* ruime klikzone */}
-              <circle cx={x} cy={y} r={14} fill="transparent" />
-              <circle
-                cx={x}
-                cy={y}
-                r={12}
-                fill="none"
-                strokeWidth={1.5}
-                className="stroke-foreground opacity-0 group-focus-visible:opacity-100"
-              />
-              <Dot x={x} y={y} sunday={m.sunday} r={on ? 7 : 5} />
+              <g transform={`translate(${x} ${y}) scale(${k})`}>
+                {/* ruime klikzone */}
+                <circle r={14} fill="transparent" />
+                <circle
+                  r={12}
+                  fill="none"
+                  strokeWidth={1.5}
+                  className="stroke-foreground opacity-0 group-focus-visible:opacity-100"
+                />
+                <Dot x={0} y={0} sunday={m.sunday} r={on ? 7 : 5} />
+              </g>
             </g>
           );
         })}
 
         {/* Actieve markering en label bovenop, zodat overlappende markers (bv. Leiden) leesbaar blijven. */}
-        {active && <ActiveLabel mis={active} />}
+        {active && (
+          <ActiveLabel
+            mis={active}
+            k={k}
+            right={project(active.lon, active.lat)[0] < x0 + vw * 0.57}
+          />
+        )}
       </svg>
+
+      <div className="font-sans-ui absolute right-0 top-0 flex flex-col overflow-hidden border border-border bg-background/90 text-foreground">
+        <ZoomButton
+          label="Inzoomen"
+          disabled={view.z >= MAX_ZOOM}
+          onClick={() => zoomBy(BUTTON_ZOOM_STEP)}
+        >
+          +
+        </ZoomButton>
+        <ZoomButton
+          label="Uitzoomen"
+          disabled={view.z <= MIN_ZOOM}
+          onClick={() => zoomBy(1 / BUTTON_ZOOM_STEP)}
+        >
+          −
+        </ZoomButton>
+        <ZoomButton
+          label="Kaart herstellen"
+          disabled={view.z === MIN_ZOOM}
+          onClick={() => setView(HOME)}
+        >
+          ⤢
+        </ZoomButton>
+      </div>
 
       <figcaption className="font-sans-ui mt-4 flex gap-6 text-xs tracking-wide text-muted-foreground">
         <span className="inline-flex items-center gap-2">
@@ -279,6 +454,31 @@ function MissenMap({
   );
 }
 
+function ZoomButton({
+  label,
+  disabled,
+  onClick,
+  children,
+}: {
+  label: string;
+  disabled: boolean;
+  onClick: () => void;
+  children: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      disabled={disabled}
+      onClick={onClick}
+      className="flex h-9 w-9 items-center justify-center border-b border-border text-lg leading-none transition-colors last:border-b-0 hover:bg-muted focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent disabled:cursor-default disabled:text-muted-foreground/40 disabled:hover:bg-transparent motion-reduce:transition-none"
+    >
+      {children}
+    </button>
+  );
+}
+
 function Dot({ x, y, sunday, r }: { x: number; y: number; sunday: boolean; r: number }) {
   return sunday ? (
     <circle cx={x} cy={y} r={r} className="fill-accent stroke-background" strokeWidth={1.5} />
@@ -287,24 +487,15 @@ function Dot({ x, y, sunday, r }: { x: number; y: number; sunday: boolean; r: nu
   );
 }
 
-function ActiveLabel({ mis }: { mis: Mis }) {
+function ActiveLabel({ mis, k, right }: { mis: Mis; k: number; right: boolean }) {
   const [x, y] = project(mis.lon, mis.lat);
-  const right = x < 300;
   return (
-    <g aria-hidden="true" pointerEvents="none">
-      <circle
-        cx={x}
-        cy={y}
-        r={12}
-        fill="none"
-        strokeWidth={1}
-        className="stroke-accent"
-        opacity={0.55}
-      />
-      <Dot x={x} y={y} sunday={mis.sunday} r={7} />
+    <g aria-hidden="true" pointerEvents="none" transform={`translate(${x} ${y}) scale(${k})`}>
+      <circle r={12} fill="none" strokeWidth={1} className="stroke-accent" opacity={0.55} />
+      <Dot x={0} y={0} sunday={mis.sunday} r={7} />
       <text
-        x={x + (right ? 14 : -14)}
-        y={y + 5}
+        x={right ? 14 : -14}
+        y={5}
         textAnchor={right ? "start" : "end"}
         fontSize={17}
         className="fill-foreground stroke-background"
