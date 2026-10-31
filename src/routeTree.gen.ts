@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MissenRouteImport } from './routes/missen'
+import { Route as KerkenRouteImport } from './routes/kerken'
 import { Route as LangRouteImport } from './routes/$lang'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LangIndexRouteImport } from './routes/$lang/index'
@@ -20,6 +21,11 @@ import { Route as LangSeminaristenSlugRouteImport } from './routes/$lang/seminar
 const MissenRoute = MissenRouteImport.update({
   id: '/missen',
   path: '/missen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KerkenRoute = KerkenRouteImport.update({
+  id: '/kerken',
+  path: '/kerken',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LangRoute = LangRouteImport.update({
@@ -56,6 +62,7 @@ const LangSeminaristenSlugRoute = LangSeminaristenSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$lang': typeof LangRouteWithChildren
+  '/kerken': typeof KerkenRoute
   '/missen': typeof MissenRoute
   '/$lang/doneer': typeof LangDoneerRoute
   '/$lang/': typeof LangIndexRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kerken': typeof KerkenRoute
   '/missen': typeof MissenRoute
   '/$lang/doneer': typeof LangDoneerRoute
   '/$lang': typeof LangIndexRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$lang': typeof LangRouteWithChildren
+  '/kerken': typeof KerkenRoute
   '/missen': typeof MissenRoute
   '/$lang/doneer': typeof LangDoneerRoute
   '/$lang/': typeof LangIndexRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$lang'
+    | '/kerken'
     | '/missen'
     | '/$lang/doneer'
     | '/$lang/'
@@ -93,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/kerken'
     | '/missen'
     | '/$lang/doneer'
     | '/$lang'
@@ -102,6 +113,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$lang'
+    | '/kerken'
     | '/missen'
     | '/$lang/doneer'
     | '/$lang/'
@@ -112,6 +124,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LangRoute: typeof LangRouteWithChildren
+  KerkenRoute: typeof KerkenRoute
   MissenRoute: typeof MissenRoute
 }
 
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/missen'
       fullPath: '/missen'
       preLoaderRoute: typeof MissenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kerken': {
+      id: '/kerken'
+      path: '/kerken'
+      fullPath: '/kerken'
+      preLoaderRoute: typeof KerkenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$lang': {
@@ -188,6 +208,7 @@ const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LangRoute: LangRouteWithChildren,
+  KerkenRoute: KerkenRoute,
   MissenRoute: MissenRoute,
 }
 export const routeTree = rootRouteImport
